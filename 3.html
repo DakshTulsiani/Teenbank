@@ -4,18 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome</title>
-    <link rel="stylesheet" href="st.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="welcome">
-        <h1>Welcome To The Teenagers Bank</h1>
-        <h2 id="username-display"></h2>
+        <h1 id="welcome-message">Welcome To The Teenagers Bank, <span id="username-display"></span></h1>
     </div>
     <script>
         // Retrieve the username from localStorage
         const username = localStorage.getItem('username');
         if (username) {
-            // Display the username
+            // Display the username inline
             document.getElementById('username-display').innerText = username;
         } else {
             // Redirect back to the login page if no username is found
