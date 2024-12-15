@@ -76,6 +76,6 @@ button:focus {
     display: block;
     margin: auto;
 }
-.second{
-    background-color: aqua;
+.d{
+    background-color: rgb(255, 102, 0);
 }
