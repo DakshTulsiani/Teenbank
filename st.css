@@ -76,3 +76,6 @@ button:focus {
     display: block;
     margin: auto;
 }
+.second{
+    background-color: aqua;
+}
