@@ -1,9 +1,27 @@
-<html>
-    <head>
-        <title>Welcome to the Teenager bank</title>
-        <link rel="stylesheet" href="st.css">
-    </head>
-    <body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="welcome">
         <h1>Welcome To The Teenagers Bank</h1>
-    </body>
+        <h2 id="username-display"></h2>
+    </div>
+    <script>
+        // Retrieve the username from localStorage
+        const username = localStorage.getItem('username');
+        if (username) {
+            // Display the username
+            document.getElementById('username-display').innerText = username;
+        } else {
+            // Redirect back to the login page if no username is found
+            alert('No user is logged in!');
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
 </html>
