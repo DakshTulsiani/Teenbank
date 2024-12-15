@@ -9,16 +9,18 @@
 <body>
     <div class="form">
         <h1>SIGN UP HERE</h1>
-        <input type="text" name="" placeholder="Enter Username To Sign Up">
-        <input type="email" name="email" placeholder="Enter Email To Sign Up">
-        <input type="password" name="" placeholder="Enter Password To Sign Up">
+        <!-- Add an id for the username input -->
+        <input type="text" id="username" placeholder="Enter Username To Sign Up">
+        <input type="email" id="email" placeholder="Enter Email To Sign Up">
+        <input type="password" id="password" placeholder="Enter Password To Sign Up">
         <button class="btn" onclick="login()">CREATE ACCOUNT</button>
     </div>
     <script>
         function login() {
+            // Get the username from the input field
             const username = document.getElementById('username').value;
             if (username) {
-                // Save username to localStorage
+                // Save the username to localStorage
                 localStorage.setItem('username', username);
                 // Redirect to 3.html
                 window.location.href = '3.html';
@@ -27,6 +29,5 @@
             }
         }
     </script>
-
 </body>
 </html>
