@@ -4,16 +4,17 @@
     font-family: sans-serif;
 }
 body{
-    background: linear-gradient(rgba(0, 0, 0, 0.2)50%, (rgba(0, 0, 0, 0.2)50%), url(yes.jpg));
+    background: linear-gradient(rgba(0, 0, 0, 0.2)50%, (rgba(0, 0, 0, 0.2)50%));
     background-position: center;
     background-size: cover;
     height: 100vh;
+    background-image: url(yes.jpg);
 }
 .form{
     width: 250px;
     height: 340px;
     color: #fff;
-    background: linear-gradient(to top,rgba(0, 0, 0, 0.8)50%,rgba(0, 0, 0, 0.8)50%,url(yes.jpg));
+    background: linear-gradient(to top,rgba(0, 0, 0, 0.8)50%,rgba(0, 0, 0, 0.8)50%);
     position: absolute;
     top: 50%;
     left: 50%;
