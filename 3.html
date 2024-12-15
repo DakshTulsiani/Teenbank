@@ -13,37 +13,66 @@
     </div>
     <div class="whiteMap">
         <table class="table-responsive">
-        <tbody>
-        <tr>
-        <td class="first">
-        <h2 class="cur">Select your currency</h2>
-        </td>
-        <td class="second"><select onchange="setCurrency($(this).val()); hideThisPopup();">
-        <option>Select</option>
-        <option value="1">Euro(€)</option>
-        <option value="2">U.S. Dollar($)</option>
-        <option value="3">Japanese Yen(¥)</option>
-        <option value="4">Indian Rupee(₹)</option>
-        <option value="5">Swiss Franc(₣)</option>
-        <option value="6">Chinese Yuan(¥)</option>
-        <option value="7">Canadian Dollar($)</option>
-        <option value="8">Australian Dollar($)</option>
-        <option value="9">New Zealand Dollar($)</option>
-        </select></td>
-        </tr>
-        </tbody>
+            <tbody>
+                <tr>
+                    <td class="first">
+                        <h2 class="cur">Select your currency</h2>
+                    </td>
+                    <td class="second">
+                        <div class="blue">
+                            <!-- Currency Dropdown -->
+                            <select onchange="setCurrency($(this).val()); hideThisPopup();">
+                                <option>Select</option>
+                                <option value="1">Euro (€)</option>
+                                <option value="2">U.S. Dollar ($)</option>
+                                <option value="3">Japanese Yen (¥)</option>
+                                <option value="4">Indian Rupee (₹)</option>
+                                <option value="5">Swiss Franc (₣)</option>
+                                <option value="6">Chinese Yuan (¥)</option>
+                                <option value="7">Canadian Dollar ($)</option>
+                                <option value="8">Australian Dollar ($)</option>
+                                <option value="9">New Zealand Dollar ($)</option>
+                            </select>
+                            <!-- Money Input Field -->
+                            <input type="number" id="money" placeholder="Enter Amount To Deposit">
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
         </table>
-        </div>
+        <button onclick="submitForm()">Submit</button>
+    </div>
     <script>
         // Retrieve the username from localStorage
         const username = localStorage.getItem('username');
         if (username) {
-            // Display the username inline
             document.getElementById('username-display').innerText = username;
         } else {
-            // Redirect back to the login page if no username is found
             alert('No user is logged in!');
             window.location.href = 'index.html';
+        }
+
+        // Example functions for setting currency
+        function setCurrency(currencyValue) {
+            console.log(`Currency set to: ${currencyValue}`);
+        }
+
+        // Placeholder function for form submission
+        function submitForm() {
+            const amount = document.getElementById('money').value;
+            const selectedCurrency = document.querySelector('select').value;
+
+            if (!selectedCurrency || selectedCurrency === "Select") {
+                alert('Please select a currency.');
+                return;
+            }
+
+            if (!amount || amount <= 0) {
+                alert('Please enter a valid amount.');
+                return;
+            }
+
+            alert(`You have entered ${amount} in the selected currency.`);
         }
     </script>
 </body>

@@ -1,9 +1,71 @@
-body{
+body {
     background-image: url(yesr.jpg);
+    background-size: cover; /* Ensure the image covers the entire background */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    font-family: Arial, sans-serif; /* Set a clean font for the page */
 }
-h1{
+
+h1 {
     font-size: 70px;
+    text-align: center; /* Center-align the main heading */
+    margin-top: 20px; /* Add some space from the top */
 }
-.cur{
+
+h2 {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px; /* Add spacing below subheadings */
+}
+
+.cur {
     color: blue;
+}
+
+.table-responsive {
+    width: 80%; /* Make the table responsive by limiting its width */
+    margin: 0 auto; /* Center the table horizontally */
+}
+
+.table-responsive td {
+    padding: 15px; /* Add padding around table cells */
+    vertical-align: middle; /* Align content vertically in the middle */
+}
+
+select, input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px; /* Add rounded corners */
+    outline: none;
+}
+
+select:focus, input:focus {
+    border-color: blue; /* Highlight the border on focus */
+    box-shadow: 0 0 5px rgba(0, 0, 255, 0.5); /* Add a subtle glow effect */
+}
+
+.blue {
+    display: flex; /* Align dropdown and input field horizontally */
+    align-items: center; /* Center items vertically */
+    gap: 15px; /* Add space between dropdown and input */
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: blue;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: darkblue;
+}
+
+button:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 0, 255, 0.5);
 }
