@@ -73,4 +73,6 @@ button:focus {
 }
 .btnnn{
     text-align: center;
+    display: block;
+    margin: auto;
 }
