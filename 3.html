@@ -16,6 +16,37 @@
             <tbody>
                 <tr>
                     <td class="first">
+                        <h2 class="cur">Select your bank in which you have a account</h2>
+                    </td>
+                    <td class="second">
+                        <div class="blue">
+                            <!-- Currency Dropdown -->
+                            <select onchange="setCurrency($(this).val()); hideThisPopup();" class="d">
+                                <option>Select</option>
+                                <option value="11">HDFC Bank</option>
+                                <option value="12">ICICI BANK</option>
+                                <option value="13">SBI(State Bank of India)</option>
+                                <option value="14">Kotak Mahindra Bank</option>
+                                <option value="15">Punjab National Bank</option>
+                                <option value="16">Indian Overseas Bank</option>
+                                <option value="17">Bank of Baroda(CAN$)</option>
+                                <option value="18">Union Bank</option>
+                                <option value="19">Canara Bank</option>
+                                <option value="10">Axis Bank</option>
+                            </select>
+                            <!-- Money Input Field -->
+                            <input type="number" id="money" placeholder="Enter Account" class="d">
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="whiteMap">
+        <table class="table-responsive">
+            <tbody>
+                <tr>
+                    <td class="first">
                         <h2 class="cur">Select your currency</h2>
                     </td>
                     <td class="second">
