@@ -64,7 +64,7 @@ body{
     color: #9ec8df;
     font-weight: bold;
 }
-.btnn a:hover{
+.btnn:hover{
     color: #00f0ff;
 }
 .form .link{
