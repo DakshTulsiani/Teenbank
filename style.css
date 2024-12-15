@@ -65,7 +65,7 @@ body{
 .form .link a:hover{
     color: orange;
 }
-.btn a{
+.btn {
     font-size: 18px;
     padding: 10px 15px;
     background: transparent;
