@@ -13,7 +13,7 @@ body{
     width: 250px;
     height: 340px;
     color: #fff;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.8)50%, rgba(0, 0, 0, 0.8)50%,);
+    background: linear-gradient(to top,rgba(0, 0, 0, 0.8)50%,rgba(0, 0, 0, 0.8)50%,);
     position: absolute;
     top: 50%;
     left: 50%;
