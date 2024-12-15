@@ -51,23 +51,6 @@ body{
     color: #fff;
     font-family: Arial;
 }
-.btnn{
-    font-size: 18px;
-    padding: 10px 15px;
-    background: transparent;
-    border: none;
-    margin-top: 10px;
-    margin-left: 80px;
-    cursor: pointer;
-}
-.btnn a{
-    text-decoration: none;
-    color: #9ec8df;
-    font-weight: bold;
-}
-.btnn a:hover{
-    color: #00f0ff;
-}
 .form .link{
     font-family: Arial;
     font-size: 17px;
@@ -96,4 +79,5 @@ body{
     font-weight: bold;
 }
 .btn a:hover{
-    color: #00f0ff;}
+    color: #00f0ff;
+}
