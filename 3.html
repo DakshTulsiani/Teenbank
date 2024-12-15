@@ -40,7 +40,7 @@
                 </tr>
             </tbody>
         </table>
-        <button onclick="submitForm()" class="btnnn">Submit</button>
+        <button class="btnnn"><a href="4.html">Deposit</a></button>
     </div>
     <script>
         // Retrieve the username from localStorage
@@ -50,29 +50,6 @@
         } else {
             alert('No user is logged in!');
             window.location.href = 'index.html';
-        }
-
-        // Example functions for setting currency
-        function setCurrency(currencyValue) {
-            console.log(`Currency set to: ${currencyValue}`);
-        }
-
-        // Placeholder function for form submission
-        function submitForm() {
-            const amount = document.getElementById('money').value;
-            const selectedCurrency = document.querySelector('select').value;
-
-            if (!selectedCurrency || selectedCurrency === "Select") {
-                alert('Please select a currency.');
-                return;
-            }
-
-            if (!amount || amount <= 0) {
-                alert('Please enter a valid amount.');
-                return;
-            }
-
-            alert(`You have entered ${amount} in the selected currency.`);
         }
     </script>
 </body>
