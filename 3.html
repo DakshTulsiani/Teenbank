@@ -11,6 +11,24 @@
         <h1 id="welcome-message">Welcome To The Teenager Bank, <span id="username-display"></span></h1>
         <h2><em>A Bank where teenagers can store their money.</em></h2>
     </div>
+    <div class="whiteMap">
+        <table class="table-responsive">
+        <tbody>
+        <tr>
+        <td class="first">
+        <h2>Select your<br />currency</h2>
+        </td>
+        <td class="second"><select onchange="setCurrency($(this).val()); hideThisPopup();">
+        <option>-- select --</option>
+        <option value="1">(€) Euro</option>
+        <option value="2">($) U.S. Dollar</option>
+        <option value="3">(GBP) Japanese Yen</option>
+        <option value="4">Indian Rupee (INR): ₹</option>
+        </select></td>
+        </tr>
+        </tbody>
+        </table>
+        </div>
     <script>
         // Retrieve the username from localStorage
         const username = localStorage.getItem('username');
