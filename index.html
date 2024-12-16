@@ -30,50 +30,39 @@
     </div>
 
     <script>
-        function login() {
-            window.location.href ='1.html'
-            const username = document.getElementById('username').value;
-            const email = document.getElementById('email').value;
+        // Check if the user is logged in by checking if email exists in localStorage
+        const email = localStorage.getItem('email');
+        
+        // Create a balance message element for the bottom-right corner
+        const balanceDiv = document.createElement('div');
+        balanceDiv.classList.add('balance-message');
 
-            if (username && email) {
-                // Save username and email to localStorage
-                localStorage.setItem('username', username);
-                localStorage.setItem('email', email);
-
-                // Redirect to 3.html
-                window.location.href = '3.html';
-            } else {
-                alert('Please enter both username and email!');
-            }
-        }
-
-        // Display the user's balance from localStorage
-        window.onload = function() {
-            const email = localStorage.getItem('email');
-            if (!email) {
-                alert('No user logged in!');
-                window.location.href = 'index.html';
-                return;
-            }
-
+        if (!email) {
+            // If no user is logged in, show "No deposits made"
+            balanceDiv.innerHTML = 'No deposits made. Please login.';
+        } else {
+            // Retrieve user deposits from localStorage
             const userBalance = JSON.parse(localStorage.getItem('userBalance')) || {};
             const balance = userBalance[email] || [];
 
-            let balanceMessage = '';
             if (balance.length > 0) {
+                let balanceMessage = '';
                 balance.forEach(item => {
                     balanceMessage += `You have deposited ${item.currency} ${item.amount} from ${item.bank} using account ${item.account}.<br>`;
                 });
+                balanceDiv.innerHTML = balanceMessage;
             } else {
-                balanceMessage = 'No deposits found. Start saving your money!';
+                balanceDiv.innerHTML = 'No deposits made. Start saving your money!';
             }
+        }
 
-            // Create a balance message element and append it to the page
-            const balanceDiv = document.createElement('div');
-            balanceDiv.classList.add('balance-message');
-            balanceDiv.innerHTML = balanceMessage;
-            document.body.appendChild(balanceDiv);
-        };
+        // Append the balance message to the body
+        document.body.appendChild(balanceDiv);
+
+        // Function to handle the login redirection to 1.html
+        function login() {
+            window.location.href = '1.html';
+        }
     </script>
 </body>
 </html>
