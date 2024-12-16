@@ -75,8 +75,8 @@
     </div>
     <script>
         // Retrieve the username and email from localStorage
-        const username = localStorage.getItem('username');
-        const email = localStorage.getItem('email');
+        const username = localStorage.getItem('username', username);
+        const email = localStorage.getItem('email', email);
         if (username && email) {
             document.getElementById('username-display').innerText = username;
         } else {
@@ -86,10 +86,10 @@
 
         // Function to handle deposit
         function deposit() {
-            const bank = document.getElementById('bank').value;
-            const account = document.getElementById('account').value;
-            const currency = document.getElementById('currency').value;
-            const amount = document.getElementById('amount').value;
+            const bank = document.getElementById('bank', bank).value;
+            const account = document.getElementById('account', account).value;
+            const currency = document.getElementById('currency', currency).value;
+            const amount = document.getElementById('amount', amount).value;
 
             if (bank === "Select" || currency === "Select" || !account || !amount) {
                 alert("Please fill all fields correctly.");

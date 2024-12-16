@@ -21,8 +21,8 @@
     </div>
     <script>
         function login() {
-            const username = document.getElementById('username').value;
-            const email = document.getElementById('email').value;  // Get email as well
+            const username = document.getElementById('username', email).value;
+            const email = document.getElementById('email', email).value;  // Get email as well
             if (username && email) {
                 // Save username and email to localStorage
                 localStorage.setItem('username', username);

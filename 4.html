@@ -16,11 +16,11 @@
 
         <script>
             // Retrieve stored data from localStorage
-            const username = localStorage.getItem('username');
-            const bank = localStorage.getItem('bank');
-            const account = localStorage.getItem('account');
-            const currency = localStorage.getItem('currency');
-            const amount = localStorage.getItem('amount');
+            const username = localStorage.getItem('username', username);
+            const bank = localStorage.getItem('bank', bank);
+            const account = localStorage.getItem('account', account);
+            const currency = localStorage.getItem('currency', currency);
+            const amount = localStorage.getItem('amount', amount);
 
             // Check if any of the required data is missing
             if (!username || !bank || !account || !currency || !amount) {

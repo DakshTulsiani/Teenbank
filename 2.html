@@ -18,8 +18,8 @@
     <script>
         function signup() {
             // Get the username and email from the input fields
-            const username = document.getElementById('username').value;
-            const email = document.getElementById('email').value;
+            const username = document.getElementById('username', username).value;
+            const email = document.getElementById('email', email).value;
             if (username && email) {
                 // Save the username and email to localStorage
                 localStorage.setItem('username', username);
