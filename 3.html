@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome</title>
+    <title>Welcome to the Bank</title>
     <link rel="stylesheet" href="st.css">
 </head>
 <body>
@@ -34,8 +34,6 @@
                                 <option value="Canara Bank">Canara Bank</option>
                                 <option value="Axis Bank">Axis Bank</option>
                             </select>
-                                <!-- Add other banks here -->
-                            </select>
                             <!-- Account Input Field -->
                             <input type="text" id="account" placeholder="Enter Account" class="d">
                         </div>
@@ -65,7 +63,6 @@
                                 <option value="CAN$">Canadian Dollar (CAN$)</option>
                                 <option value="A$">Australian Dollar (A$)</option>
                                 <option value="NZ$">New Zealand Dollar (NZ$)</option>
-                                <!-- Add other currencies here -->
                             </select>
                             <!-- Money Input Field -->
                             <input type="number" id="amount" placeholder="Enter Amount" class="d">
@@ -76,17 +73,18 @@
         </table>
         <button class="btnnn" onclick="deposit()">Deposit</button>
     </div>
-
     <script>
+        // Retrieve the username and email from localStorage
         const username = localStorage.getItem('username');
         const email = localStorage.getItem('email');
-        if (username) {
+        if (username && email) {
             document.getElementById('username-display').innerText = username;
         } else {
             alert('No user is logged in!');
             window.location.href = 'index.html';
         }
 
+        // Function to handle deposit
         function deposit() {
             const bank = document.getElementById('bank').value;
             const account = document.getElementById('account').value;
@@ -98,34 +96,34 @@
                 return;
             }
 
-            // Retrieve user's balance from localStorage
-            const userBalance = JSON.parse(localStorage.getItem('userBalance')) || {};
+            // Retrieve the user's balance from localStorage
+            let userBalance = JSON.parse(localStorage.getItem('userBalance')) || {};
 
-            // If user already exists, update their balance
-            if (userBalance[email]) {
-                const currentBalance = userBalance[email];
-                if (currentBalance.currency === currency) {
-                    // Add money if same currency
-                    currentBalance.amount = parseFloat(currentBalance.amount) + parseFloat(amount);
-                } else {
-                    // Mention both currencies if different
-                    currentBalance.amount = `${currentBalance.amount} ${currentBalance.currency} and ${amount} ${currency}`;
-                    currentBalance.currency = `${currentBalance.currency} and ${currency}`;
-                }
-            } else {
-                // Create new balance entry for the user
-                userBalance[email] = {
-                    bank,
-                    account,
-                    currency,
-                    amount
-                };
+            // If the user's email doesn't have a balance record yet, initialize an empty array
+            if (!userBalance[email]) {
+                userBalance[email] = [];
             }
 
-            // Save updated user balance to localStorage
+            // Find if the currency already exists for the user
+            let currencyExists = false;
+            for (let i = 0; i < userBalance[email].length; i++) {
+                if (userBalance[email][i].currency === currency) {
+                    // If the currency exists, add the amount to the existing deposit
+                    userBalance[email][i].amount = parseFloat(userBalance[email][i].amount) + parseFloat(amount);
+                    currencyExists = true;
+                    break;
+                }
+            }
+
+            // If currency doesn't exist for the user, create a new entry
+            if (!currencyExists) {
+                userBalance[email].push({ bank, account, currency, amount });
+            }
+
+            // Save updated balance back to localStorage
             localStorage.setItem('userBalance', JSON.stringify(userBalance));
 
-            // Redirect to 4.html
+            // Redirect to 4.html to confirm the deposit
             window.location.href = '4.html';
         }
     </script>
