@@ -28,24 +28,36 @@
             const message = `${username} has deposited ${currency} ${amount} from ${bank} using account ${account}.`;
             document.getElementById('transaction-message').innerText = message;
 
-            // Launch confetti
+            // Launch confetti from both sides
             function launchConfetti() {
-                confetti({
-                    particleCount: 100,
-                    spread: 70,
-                    origin: { x: 0.5, y: 0.6 }
-                });
+                const duration = 3000; // Duration of the animation
+                const end = Date.now() + duration;
+
+                (function frame() {
+                    // Left side
+                    confetti({
+                        particleCount: 5,
+                        angle: 60, // Angle for the left side
+                        spread: 55,
+                        origin: { x: 0, y: Math.random() }, // From the left
+                    });
+
+                    // Right side
+                    confetti({
+                        particleCount: 5,
+                        angle: 120, // Angle for the right side
+                        spread: 55,
+                        origin: { x: 1, y: Math.random() }, // From the right
+                    });
+
+                    if (Date.now() < end) {
+                        requestAnimationFrame(frame);
+                    }
+                })();
             }
 
-            // Continuous confetti for 3 seconds
-            const duration = 3000;
-            const end = Date.now() + duration;
-            (function frame() {
-                launchConfetti();
-                if (Date.now() < end) {
-                    requestAnimationFrame(frame);
-                }
-            })();
+            // Start the confetti animation
+            launchConfetti();
         }
     </script>
 </body>
