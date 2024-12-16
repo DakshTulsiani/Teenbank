@@ -39,7 +39,7 @@
 
         if (!email) {
             // If no user is logged in, show "No deposits made"
-            balanceDiv.innerHTML = 'No deposits made. Please login.';
+            balanceDiv.innerHTML = 'No deposits made. Start saving your money!';
         } else {
             // Retrieve user deposits from localStorage
             const userBalance = JSON.parse(localStorage.getItem('userBalance')) || {};
