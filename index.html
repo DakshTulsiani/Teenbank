@@ -31,7 +31,7 @@
 
     <script>
         // Check if the user is logged in by checking if email exists in localStorage
-        const email = localStorage.getItem('email');
+        const email = localStorage.getItem('email', emails);
         
         // Create a balance message element for the bottom-right corner
         const balanceDiv = document.createElement('div');
