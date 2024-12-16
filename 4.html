@@ -25,12 +25,12 @@
             window.location.href = 'index.html';
         } else {
             // Display transaction details
-            const message = `${username} has deposited ${currency} ${amount}<br> from ${bank} using account ${account}.`;
+            const message = `${username} has deposited ${currency} ${amount}\nfrom ${bank} using account ${account}.`;
             document.getElementById('transaction-message').innerText = message;
 
             // Launch confetti from both sides
             function launchConfetti() {
-                const duration = 9s00; // Duration of the animation
+                const duration = 900; // Duration of the animation
                 const end = Date.now() + duration;
 
                 (function frame() {
