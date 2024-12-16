@@ -20,7 +20,6 @@
                     </td>
                     <td class="second">
                         <div class="blue">
-                            <!-- Bank Dropdown -->
                             <select id="bank" class="d">
                                 <option>Select</option>
                                 <option value="HDFC Bank">HDFC Bank</option>
@@ -34,7 +33,6 @@
                                 <option value="Canara Bank">Canara Bank</option>
                                 <option value="Axis Bank">Axis Bank</option>
                             </select>
-                            <!-- Account Input Field -->
                             <input type="text" id="account" placeholder="Enter Account" class="d">
                         </div>
                     </td>
@@ -51,80 +49,52 @@
                     </td>
                     <td class="second">
                         <div class="blue">
-                            <!-- Currency Dropdown -->
                             <select id="currency" class="d">
                                 <option>Select</option>
-                                <option value="€">Euro (€)</option>
-                                <option value="$">U.S. Dollar ($)</option>
-                                <option value="¥">Japanese Yen (¥)</option>
                                 <option value="₹">Indian Rupee (₹)</option>
-                                <option value="₣">Swiss Franc (₣)</option>
-                                <option value="¥">Chinese Yuan (¥)</option>
-                                <option value="CAN$">Canadian Dollar (CAN$)</option>
-                                <option value="A$">Australian Dollar (A$)</option>
-                                <option value="NZ$">New Zealand Dollar (NZ$)</option>
+                                <option value="$">U.S. Dollar ($)</option>
                             </select>
-                            <!-- Money Input Field -->
                             <input type="number" id="amount" placeholder="Enter Amount" class="d">
                         </div>
                     </td>
                 </tr>
             </tbody>
         </table>
-        <button class="btnnn" onclick="deposit()">Deposit</button>
+        <button class="btnnn" onclick="storeDeposit()">Deposit</button>
     </div>
     <script>
-        // Retrieve the username and email from localStorage
-        const username = localStorage.getItem('username', username);
-        const email = localStorage.getItem('email', email);
-        if (username && email) {
+        window.onload = function() {
+            const username = localStorage.getItem('username');
             document.getElementById('username-display').innerText = username;
-        } else {
-            alert('No user is logged in!');
-            window.location.href = 'index.html';
         }
 
-        // Function to handle deposit
-        function deposit() {
-            const bank = document.getElementById('bank', bank).value;
-            const account = document.getElementById('account', account).value;
-            const currency = document.getElementById('currency', currency).value;
-            const amount = document.getElementById('amount', amount).value;
+        function storeDeposit() {
+            const bank = document.getElementById('bank').value;
+            const account = document.getElementById('account').value;
+            const currency = document.getElementById('currency').value;
+            const amount = document.getElementById('amount').value;
 
-            if (bank === "Select" || currency === "Select" || !account || !amount) {
-                alert("Please fill all fields correctly.");
-                return;
-            }
+            if (bank && account && currency && amount) {
+                const email = localStorage.getItem('email');
+                let userBalance = JSON.parse(localStorage.getItem('userBalance')) || {};
 
-            // Retrieve the user's balance from localStorage
-            let userBalance = JSON.parse(localStorage.getItem('userBalance')) || {};
-
-            // If the user's email doesn't have a balance record yet, initialize an empty array for their email
-            if (!userBalance[email]) {
-                userBalance[email] = [];
-            }
-
-            // Check if the currency already exists for the user
-            let currencyExists = false;
-            for (let i = 0; i < userBalance[email].length; i++) {
-                if (userBalance[email][i].currency === currency) {
-                    // If the currency exists, add the amount to the existing deposit
-                    userBalance[email][i].amount = (parseFloat(userBalance[email][i].amount) + parseFloat(amount)).toString();
-                    currencyExists = true;
-                    break;
+                if (!userBalance[email]) {
+                    userBalance[email] = [];
                 }
+
+                userBalance[email].push({
+                    bank,
+                    account,
+                    currency,
+                    amount
+                });
+
+                localStorage.setItem('userBalance', JSON.stringify(userBalance));
+
+                window.location.href = '4.html';
+            } else {
+                alert('Please fill in all the fields!');
             }
-
-            // If currency doesn't exist for the user, create a new entry
-            if (!currencyExists) {
-                userBalance[email].push({ bank, account, currency, amount });
-            }
-
-            // Save the updated balance back to localStorage
-            localStorage.setItem('userBalance', JSON.stringify(userBalance));
-
-            // Redirect to 4.html to confirm the deposit
-            window.location.href = '4.html';
         }
     </script>
 </body>

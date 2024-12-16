@@ -6,7 +6,6 @@
     <title>Bank For Teens</title>
     <link rel="stylesheet" href="stylesd.css">
     <style>
-        /* Style for the bottom-right balance display */
         .balance-message {
             position: fixed;
             bottom: 20px;
@@ -30,18 +29,14 @@
     </div>
 
     <script>
-        // Check if the user is logged in by checking if email exists in localStorage
-        const email = localStorage.getItem('email', emails);
+        const email = localStorage.getItem('email');
         
-        // Create a balance message element for the bottom-right corner
         const balanceDiv = document.createElement('div');
         balanceDiv.classList.add('balance-message');
 
         if (!email) {
-            // If no user is logged in, show "No deposits made"
             balanceDiv.innerHTML = 'No deposits made. Start saving your money!';
         } else {
-            // Retrieve user deposits from localStorage
             const userBalance = JSON.parse(localStorage.getItem('userBalance')) || {};
             const balance = userBalance[email] || [];
 
@@ -56,10 +51,8 @@
             }
         }
 
-        // Append the balance message to the body
         document.body.appendChild(balanceDiv);
 
-        // Function to handle the login redirection to 1.html
         function login() {
             window.location.href = '1.html';
         }

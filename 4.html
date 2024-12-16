@@ -15,51 +15,42 @@
         </div>
 
         <script>
-            // Retrieve stored data from localStorage
-            const username = localStorage.getItem('username', username);
-            const bank = localStorage.getItem('bank', bank);
-            const account = localStorage.getItem('account', account);
-            const currency = localStorage.getItem('currency', currency);
-            const amount = localStorage.getItem('amount', amount);
+            const username = localStorage.getItem('username');
+            const bank = localStorage.getItem('bank');
+            const account = localStorage.getItem('account');
+            const currency = localStorage.getItem('currency');
+            const amount = localStorage.getItem('amount');
 
-            // Check if any of the required data is missing
             if (!username || !bank || !account || !currency || !amount) {
                 alert('Incomplete transaction data. Redirecting to home.');
                 window.location.href = 'index.html';
             } else {
-                // Display transaction details with correct format
                 const message = `${username} has deposited ${currency} ${amount} from ${bank} using account ${account}.`;
                 document.getElementById('transaction-message').innerText = message;
 
-                // Launch confetti from both sides
                 function launchConfetti() {
-                    const duration = 900; // Duration of the animation
+                    const duration = 900;
                     const end = Date.now() + duration;
 
                     (function frame() {
-                        // Left side
                         confetti({
                             particleCount: 5,
-                            angle: 60, // Angle for the left side
+                            angle: 60,
                             spread: 55,
-                            origin: { x: 0, y: Math.random() }, // From the left
+                            origin: { x: 0, y: Math.random() },
                         });
-
-                        // Right side
                         confetti({
                             particleCount: 5,
-                            angle: 120, // Angle for the right side
+                            angle: 120,
                             spread: 55,
-                            origin: { x: 1, y: Math.random() }, // From the right
+                            origin: { x: 1, y: Math.random() },
                         });
-
                         if (Date.now() < end) {
                             requestAnimationFrame(frame);
                         }
                     })();
                 }
 
-                // Start the confetti animation
                 launchConfetti();
             }
         </script>
