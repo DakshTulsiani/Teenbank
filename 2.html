@@ -13,19 +13,21 @@
         <input type="text" id="username" placeholder="Enter Username To Sign Up">
         <input type="email" id="email" placeholder="Enter Email To Sign Up">
         <input type="password" id="password" placeholder="Enter Password To Sign Up">
-        <button class="btn" onclick="login()">CREATE ACCOUNT</button>
+        <button class="btn" onclick="signup()">CREATE ACCOUNT</button>
     </div>
     <script>
-        function login() {
-            // Get the username from the input field
+        function signup() {
+            // Get the username and email from the input fields
             const username = document.getElementById('username').value;
-            if (username) {
-                // Save the username to localStorage
+            const email = document.getElementById('email').value;
+            if (username && email) {
+                // Save the username and email to localStorage
                 localStorage.setItem('username', username);
+                localStorage.setItem('email', email); // Save email
                 // Redirect to 3.html
                 window.location.href = '3.html';
             } else {
-                alert('Please enter your username!');
+                alert('Please enter both username and email!');
             }
         }
     </script>
