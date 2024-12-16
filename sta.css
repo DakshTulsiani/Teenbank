@@ -9,9 +9,8 @@ background-image: url(ya.jpg);
 body{
     background: linear-gradient(rgba(0, 0, 0, 0.2)50%, (rgba(0, 0, 0, 0.2)50%), url(ya.jpg));
     background-position: center;
-    background-size: 100% 945px;
+    background-size: 100% 1155px;
     height: 100vh;
-    background-image: url(yesr.jpg);
 }
 .form{
     width: 250px;
