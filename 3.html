@@ -99,12 +99,12 @@
             // Retrieve the user's balance from localStorage
             let userBalance = JSON.parse(localStorage.getItem('userBalance')) || {};
 
-            // If the user's email doesn't have a balance record yet, initialize an empty array
+            // If the user's email doesn't have a balance record yet, initialize an empty object for their email
             if (!userBalance[email]) {
                 userBalance[email] = [];
             }
 
-            // Find if the currency already exists for the user
+            // Check if the currency already exists for the user
             let currencyExists = false;
             for (let i = 0; i < userBalance[email].length; i++) {
                 if (userBalance[email][i].currency === currency) {
