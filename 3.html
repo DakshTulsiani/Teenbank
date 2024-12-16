@@ -25,14 +25,7 @@
                                 <option>Select</option>
                                 <option value="HDFC Bank">HDFC Bank</option>
                                 <option value="ICICI Bank">ICICI Bank</option>
-                                <option value="SBI">SBI (State Bank of India)</option>
-                                <option value="Kotak Mahindra Bank">Kotak Mahindra Bank</option>
-                                <option value="Punjab National Bank">Punjab National Bank</option>
-                                <option value="Indian Overseas Bank">Indian Overseas Bank</option>
-                                <option value="Bank of Baroda">Bank of Baroda</option>
-                                <option value="Union Bank">Union Bank</option>
-                                <option value="Canara Bank">Canara Bank</option>
-                                <option value="Axis Bank">Axis Bank</option>
+                                <!-- Add other banks here -->
                             </select>
                             <!-- Account Input Field -->
                             <input type="text" id="account" placeholder="Enter Account" class="d">
@@ -56,13 +49,7 @@
                                 <option>Select</option>
                                 <option value="€">Euro (€)</option>
                                 <option value="$">U.S. Dollar ($)</option>
-                                <option value="¥">Japanese Yen (¥)</option>
-                                <option value="₹">Indian Rupee (₹)</option>
-                                <option value="₣">Swiss Franc (₣)</option>
-                                <option value="¥">Chinese Yuan (¥)</option>
-                                <option value="CAN$">Canadian Dollar (CAN$)</option>
-                                <option value="A$">Australian Dollar (A$)</option>
-                                <option value="NZ$">New Zealand Dollar (NZ$)</option>
+                                <!-- Add other currencies here -->
                             </select>
                             <!-- Money Input Field -->
                             <input type="number" id="amount" placeholder="Enter Amount" class="d">
@@ -73,9 +60,10 @@
         </table>
         <button class="btnnn" onclick="deposit()">Deposit</button>
     </div>
+
     <script>
-        // Retrieve the username from localStorage
         const username = localStorage.getItem('username');
+        const email = localStorage.getItem('email');
         if (username) {
             document.getElementById('username-display').innerText = username;
         } else {
@@ -83,7 +71,6 @@
             window.location.href = 'index.html';
         }
 
-        // Function to handle deposit
         function deposit() {
             const bank = document.getElementById('bank').value;
             const account = document.getElementById('account').value;
@@ -95,11 +82,32 @@
                 return;
             }
 
-            // Save data to localStorage
-            localStorage.setItem('bank', bank);
-            localStorage.setItem('account', account);
-            localStorage.setItem('currency', currency);
-            localStorage.setItem('amount', amount);
+            // Retrieve user's balance from localStorage
+            const userBalance = JSON.parse(localStorage.getItem('userBalance')) || {};
+
+            // If user already exists, update their balance
+            if (userBalance[email]) {
+                const currentBalance = userBalance[email];
+                if (currentBalance.currency === currency) {
+                    // Add money if same currency
+                    currentBalance.amount = parseFloat(currentBalance.amount) + parseFloat(amount);
+                } else {
+                    // Mention both currencies if different
+                    currentBalance.amount = `${currentBalance.amount} ${currentBalance.currency} and ${amount} ${currency}`;
+                    currentBalance.currency = `${currentBalance.currency} and ${currency}`;
+                }
+            } else {
+                // Create new balance entry for the user
+                userBalance[email] = {
+                    bank,
+                    account,
+                    currency,
+                    amount
+                };
+            }
+
+            // Save updated user balance to localStorage
+            localStorage.setItem('userBalance', JSON.stringify(userBalance));
 
             // Redirect to 4.html
             window.location.href = '4.html';
