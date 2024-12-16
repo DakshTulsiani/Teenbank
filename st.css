@@ -81,7 +81,6 @@ button:focus {
 }
 .h{
     margin-left: 276px;
-    position: ;
 }
 .o{
     margin-left: 0px;
@@ -97,6 +96,7 @@ button:focus {
     transform: translate(-50%, -50%);
     border-radius: 10px;
     padding: 40px 25px;
+}
     
 .r{
     padding: 20px
