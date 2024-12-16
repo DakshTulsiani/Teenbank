@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction Successful</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link rel="stylesheet" href="st.css">
+</head>
+<body>
+    <div class="welcome">
+        <h1 id="transaction-message" class="cur"></h1>
+    </div>
+
+    <script>
+        // Retrieve stored data
+        const username = localStorage.getItem('username');
+        const bank = localStorage.getItem('bank');
+        const account = localStorage.getItem('account');
+        const currency = localStorage.getItem('currency');
+        const amount = localStorage.getItem('amount');
+
+        if (!username || !bank || !account || !currency || !amount) {
+            alert('Incomplete transaction data. Redirecting to home.');
+            window.location.href = 'index.html';
+        } else {
+            // Display transaction details
+            const message = `${username} has deposited ${currency} ${amount} from ${bank} using account ${account}.`;
+            document.getElementById('transaction-message').innerText = message;
+
+            // Launch confetti
+            function launchConfetti() {
+                confetti({
+                    particleCount: 100,
+                    spread: 70,
+                    origin: { x: 0.5, y: 0.6 }
+                });
+            }
+
+            // Continuous confetti for 3 seconds
+            const duration = 3000;
+            const end = Date.now() + duration;
+            (function frame() {
+                launchConfetti();
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            })();
+        }
+    </script>
+</body>
+</html>
