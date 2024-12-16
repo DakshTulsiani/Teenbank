@@ -24,11 +24,46 @@
         <h1>Sign In To Safely Secure Your Money As A Teenager In The Bank For Teens (BOT)</h1>
     </div>
     <div class="form">
+        <button class="btn" onclick="login()">Login</button>
         
     </div>
 
     <div class="balance" id="balance">
         <!-- Balance will be shown here -->
     </div>
+    <script>
+        function login()
+        window.location.href = '1.html'
+    </script>
+    <script>
+        function login() {
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+
+            if (username && email) {
+                // Save username to localStorage
+                localStorage.setItem('username', username);
+                localStorage.setItem('email', email);
+
+                // Retrieve the user's balance from localStorage
+                const userBalance = JSON.parse(localStorage.getItem('userBalance')) || {};
+
+                // Display the balance if available
+                displayBalance(userBalance[email]);
+                window.location.href = '3.html';
+            } else {
+                alert('Please enter your username and email!');
+            }
+        }
+
+        function displayBalance(userData) {
+            const balanceDiv = document.getElementById('balance');
+            if (userData) {
+                balanceDiv.innerText = `Balance: ${userData.amount} ${userData.currency}`;
+            } else {
+                balanceDiv.innerText = 'No balance available';
+            }
+        }
+    </script>
 </body>
 </html>
