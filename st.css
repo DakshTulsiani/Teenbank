@@ -81,19 +81,23 @@ button:focus {
 }
 .h{
     margin-left: 276px;
+    position: ;
 }
 .o{
     margin-left: 0px;
 }
 .form{
-    width: 250px;
-    height: 340px;
+    width: 1000px;
+    height: 570px;
     color: #fff;
     background: linear-gradient(to top,rgba(0, 0, 0, 0.8)50%,rgba(0, 0, 0, 0.8)50%);
     position: absolute;
-    top: 50%;
+    top: 39%;
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 10px;
     padding: 40px 25px;
+    
+.r{
+    padding: 20px
 }
