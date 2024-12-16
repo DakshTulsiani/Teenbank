@@ -3,37 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bank For Teens</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Login</title>
+    <link rel="stylesheet" href="st.css">
 </head>
 <body>
-    <div class="header">
-        <h1>Sign In To Safely Secure Your Money As A Teenager In The Bank For Teens (BOT)</h1>
-    </div>
     <div class="form">
-        <h1>LOGIN HERE</h1>
-        <input type="text" id="username" placeholder="Enter Username Here">
-        <input type="email" id="email" placeholder="Enter Email Here">
-        <input type="password" id="password" placeholder="Enter Password Here">
-        <button class="btnn" onclick="login()">LOGIN</button>
-        <p class="link">Don't have an account<br>
-        <a href="2.html">Sign up</a> Here</p>
+        <h1>Login</h1>
+        <form id="login-form">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required><br><br>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br><br>
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br><br>
+            
+            <button type="button" onclick="login()">Login</button>
+        </form>
     </div>
+
     <script>
+        // Function to handle login process
         function login() {
+            // Get values from the form fields
             const username = document.getElementById('username').value;
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
+            // Check if all fields are filled
             if (username && email && password) {
+                // Store data in localStorage
                 localStorage.setItem('username', username);
                 localStorage.setItem('email', email);
-                localStorage.setItem('password', password);
+                localStorage.setItem('password', password);  // Storing password is okay for demonstration, but consider hashing for security
+                
+                // Redirect to the Deposit Page (3.html)
                 window.location.href = '3.html';
             } else {
-                alert('Please fill in all the fields!');
+                // If fields are not filled, show an alert
+                alert('Please fill in all fields');
             }
         }
     </script>
 </body>
 </html>
+

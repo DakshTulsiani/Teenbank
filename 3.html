@@ -51,8 +51,15 @@
                         <div class="blue">
                             <select id="currency" class="d">
                                 <option>Select</option>
-                                <option value="₹">Indian Rupee (₹)</option>
+                                <option value="€">Euro (€)</option>
                                 <option value="$">U.S. Dollar ($)</option>
+                                <option value="¥">Japanese Yen (¥)</option>
+                                <option value="₹">Indian Rupee (₹)</option>
+                                <option value="₣">Swiss Franc (₣)</option>
+                                <option value="¥">Chinese Yuan (¥)</option>
+                                <option value="CAN$">Canadian Dollar (CAN$)</option>
+                                <option value="A$">Australian Dollar (A$)</option>
+                                <option value="NZ$">New Zealand Dollar (NZ$)</option>
                             </select>
                             <input type="number" id="amount" placeholder="Enter Amount" class="d">
                         </div>
@@ -74,14 +81,26 @@
             const currency = document.getElementById('currency').value;
             const amount = document.getElementById('amount').value;
 
+            // Check if all fields are filled
             if (bank && account && currency && amount) {
                 const email = localStorage.getItem('email');
+
+                // Check if email exists in localStorage
+                if (!email) {
+                    alert('User email is not found. Please log in again.');
+                    window.location.href = 'index.html';  // Redirect to login if no email is found
+                    return;
+                }
+
+                // Retrieve user balance data or initialize it
                 let userBalance = JSON.parse(localStorage.getItem('userBalance')) || {};
 
+                // If userBalance for the email doesn't exist, initialize it as an empty array
                 if (!userBalance[email]) {
                     userBalance[email] = [];
                 }
 
+                // Add the new deposit entry to the user's balance
                 userBalance[email].push({
                     bank,
                     account,
@@ -89,8 +108,10 @@
                     amount
                 });
 
+                // Save the updated userBalance back to localStorage
                 localStorage.setItem('userBalance', JSON.stringify(userBalance));
 
+                // Redirect to the next page after the deposit is successfully saved
                 window.location.href = '4.html';
             } else {
                 alert('Please fill in all the fields!');
