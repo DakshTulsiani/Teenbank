@@ -99,7 +99,7 @@
             // Retrieve the user's balance from localStorage
             let userBalance = JSON.parse(localStorage.getItem('userBalance')) || {};
 
-            // If the user's email doesn't have a balance record yet, initialize an empty object for their email
+            // If the user's email doesn't have a balance record yet, initialize an empty array for their email
             if (!userBalance[email]) {
                 userBalance[email] = [];
             }
@@ -109,7 +109,7 @@
             for (let i = 0; i < userBalance[email].length; i++) {
                 if (userBalance[email][i].currency === currency) {
                     // If the currency exists, add the amount to the existing deposit
-                    userBalance[email][i].amount = parseFloat(userBalance[email][i].amount) + parseFloat(amount);
+                    userBalance[email][i].amount = (parseFloat(userBalance[email][i].amount) + parseFloat(amount)).toString();
                     currencyExists = true;
                     break;
                 }
@@ -120,7 +120,7 @@
                 userBalance[email].push({ bank, account, currency, amount });
             }
 
-            // Save updated balance back to localStorage
+            // Save the updated balance back to localStorage
             localStorage.setItem('userBalance', JSON.stringify(userBalance));
 
             // Redirect to 4.html to confirm the deposit
