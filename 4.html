@@ -15,45 +15,72 @@
         </div>
 
         <script>
-            const username = localStorage.getItem('username');
-            const bank = localStorage.getItem('bank');
-            const account = localStorage.getItem('account');
-            const currency = localStorage.getItem('currency');
-            const amount = localStorage.getItem('amount');
-
-            if (!username || !bank || !account || !currency || !amount) {
-                alert('Incomplete transaction data. Redirecting to home.');
-                window.location.href = 'index.html';
-            } else {
-                const message = `${username} has deposited ${currency} ${amount} from ${bank} using account ${account}.`;
-                document.getElementById('transaction-message').innerText = message;
-
-                function launchConfetti() {
-                    const duration = 900;
-                    const end = Date.now() + duration;
-
-                    (function frame() {
-                        confetti({
-                            particleCount: 5,
-                            angle: 60,
-                            spread: 55,
-                            origin: { x: 0, y: Math.random() },
-                        });
-                        confetti({
-                            particleCount: 5,
-                            angle: 120,
-                            spread: 55,
-                            origin: { x: 1, y: Math.random() },
-                        });
-                        if (Date.now() < end) {
-                            requestAnimationFrame(frame);
+            // Function to check if localStorage data is available
+            window.onload = function() {
+                let username = localStorage.getItem('username');
+                let bank = localStorage.getItem('bank');
+                let account = localStorage.getItem('account');
+                let currency = localStorage.getItem('currency');
+                let amount = localStorage.getItem('amount');
+        
+                // Retry logic to check if localStorage has the necessary data
+                const retryInterval = setInterval(function() {
+                    username = localStorage.getItem('username');
+                    bank = localStorage.getItem('bank');
+                    account = localStorage.getItem('account');
+                    currency = localStorage.getItem('currency');
+                    amount = localStorage.getItem('amount');
+        
+                    // Check if all the data is available
+                    if (username && bank && account && currency && amount) {
+                        clearInterval(retryInterval);  // Stop retrying once data is available
+        
+                        // Proceed with displaying the transaction message
+                        const message = `${username} has deposited ${currency} ${amount} from ${bank} using account ${account}.`;
+                        document.getElementById('transaction-message').innerText = message;
+        
+                        // Confetti animation
+                        function launchConfetti() {
+                            const duration = 900; // Duration of the animation
+                            const end = Date.now() + duration;
+        
+                            (function frame() {
+                                // Left side confetti
+                                confetti({
+                                    particleCount: 5,
+                                    angle: 60, // Angle for the left side
+                                    spread: 55,
+                                    origin: { x: 0, y: Math.random() }, // From the left
+                                });
+        
+                                // Right side confetti
+                                confetti({
+                                    particleCount: 5,
+                                    angle: 120, // Angle for the right side
+                                    spread: 55,
+                                    origin: { x: 1, y: Math.random() }, // From the right
+                                });
+        
+                                if (Date.now() < end) {
+                                    requestAnimationFrame(frame);
+                                }
+                            })();
                         }
-                    })();
-                }
-
-                launchConfetti();
-            }
+        
+                        launchConfetti();
+                    }
+                }, 200); // Check every 200ms for data in localStorage
+        
+                // Optional: If after some time the data is still missing, show an alert or redirect
+                setTimeout(function() {
+                    if (!username || !bank || !account || !currency || !amount) {
+                        alert('Incomplete transaction data. Redirecting to home.');
+                        window.location.href = 'index.html';  // Redirect to homepage if data is missing
+                    }
+                }, 3000); // Timeout after 3 seconds if data is still missing
+            };
         </script>
+        
         <button class="bt" onclick="window.location.href='index.html';">Return To Home</button>
     </div>
 </body>
