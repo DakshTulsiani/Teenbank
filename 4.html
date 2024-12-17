@@ -13,19 +13,54 @@
         <h1 class="r">Transaction Successful</h1>
         <div class="welcome">
             <h1 id="transaction-message" class="cur">Transaction Successful</h1>
+            <p id="missing-data-message" class="cur" style="color: red; font-size: 18px;"></p> <!-- Message for missing data -->
         </div>
 
         <script>
             // Retrieve updated data from localStorage
             const username = localStorage.getItem('username');
+            const email = localStorage.getItem('email');
             const bank = localStorage.getItem('bank');
             const account = localStorage.getItem('account');
             const currency = localStorage.getItem('currency');
             const amount = localStorage.getItem('amount');
 
+            // Initialize a message for missing data
+            let missingDataMessage = "Incomplete transaction data: ";
+
             // Check if any of the required data is missing
-            if (!username || !bank || !account || !currency || !amount) {
-                alert('Incomplete transaction data. Redirecting to home.');
+            let incompleteData = false;
+
+            if (!email) {
+                missingDataMessage += "Email, ";
+                incompleteData = true;
+            }
+            if (!username) {
+                missingDataMessage += "Username, ";
+                incompleteData = true;
+            }
+            if (!bank) {
+                missingDataMessage += "Bank, ";
+                incompleteData = true;
+            }
+            if (!account) {
+                missingDataMessage += "Account, ";
+                incompleteData = true;
+            }
+            if (!currency) {
+                missingDataMessage += "Currency, ";
+                incompleteData = true;
+            }
+            if (!amount) {
+                missingDataMessage += "Amount, ";
+                incompleteData = true;
+            }
+
+            // Remove the last comma and space
+            if (incompleteData) {
+                missingDataMessage = missingDataMessage.slice(0, -2);
+                document.getElementById('missing-data-message').innerText = missingDataMessage + " are missing.";
+                alert(missingDataMessage + ". Redirecting to home.");
                 window.location.href = 'index.html';  // Redirect to home if data is missing
             } else {
                 // Display transaction details with correct format
