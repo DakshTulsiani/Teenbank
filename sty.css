@@ -96,8 +96,12 @@
     .cn:hover{
         background-color: white;
     }
-    .content span{
+    .content .sdd{
         color: #ff7200;
         font-size: 60px;
         
+    }
+    .content .sd{
+        color: #ff7200;
+        font-size: 15px;
     }
