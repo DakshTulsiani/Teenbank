@@ -6,7 +6,6 @@
     <title>Transaction Successful</title>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <link rel="stylesheet" href="st.css">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
     <div class="form">
@@ -16,71 +15,45 @@
         </div>
 
         <script>
-            window.onload = function() {
-                let username = localStorage.getItem('username');
-                let bank = localStorage.getItem('bank');
-                let account = localStorage.getItem('account');
-                let currency = localStorage.getItem('currency');
-                let amount = localStorage.getItem('amount');
+            const username = localStorage.getItem('username');
+            const bank = localStorage.getItem('bank');
+            const account = localStorage.getItem('account');
+            const currency = localStorage.getItem('currency');
+            const amount = localStorage.getItem('amount');
 
-                // Retry logic in case the data isn't available yet (if page loads before localStorage is updated)
-                const retryInterval = setInterval(function() {
-                    username = localStorage.getItem('username');
-                    bank = localStorage.getItem('bank');
-                    account = localStorage.getItem('account');
-                    currency = localStorage.getItem('currency');
-                    amount = localStorage.getItem('amount');
+            if (!username || !bank || !account || !currency || !amount) {
+                alert('Incomplete transaction data. Redirecting to home.');
+                window.location.href = 'index.html';
+            } else {
+                const message = `${username} has deposited ${currency} ${amount} from ${bank} using account ${account}.`;
+                document.getElementById('transaction-message').innerText = message;
 
-                    if (username && bank && account && currency && amount) {
-                        clearInterval(retryInterval); // Stop checking once we have the data
+                function launchConfetti() {
+                    const duration = 900;
+                    const end = Date.now() + duration;
 
-                        // Proceed with transaction
-                        const message = `${username} has deposited ${currency} ${amount} from ${bank} using account ${account}.`;
-                        document.getElementById('transaction-message').innerText = message;
-
-                        // Launch confetti from both sides
-                        function launchConfetti() {
-                            const duration = 900; // Duration of the animation
-                            const end = Date.now() + duration;
-
-                            (function frame() {
-                                // Left side
-                                confetti({
-                                    particleCount: 5,
-                                    angle: 60, // Angle for the left side
-                                    spread: 55,
-                                    origin: { x: 0, y: Math.random() }, // From the left
-                                });
-
-                                // Right side
-                                confetti({
-                                    particleCount: 5,
-                                    angle: 120, // Angle for the right side
-                                    spread: 55,
-                                    origin: { x: 1, y: Math.random() }, // From the right
-                                });
-
-                                if (Date.now() < end) {
-                                    requestAnimationFrame(frame);
-                                }
-                            })();
+                    (function frame() {
+                        confetti({
+                            particleCount: 5,
+                            angle: 60,
+                            spread: 55,
+                            origin: { x: 0, y: Math.random() },
+                        });
+                        confetti({
+                            particleCount: 5,
+                            angle: 120,
+                            spread: 55,
+                            origin: { x: 1, y: Math.random() },
+                        });
+                        if (Date.now() < end) {
+                            requestAnimationFrame(frame);
                         }
+                    })();
+                }
 
-                        // Start the confetti animation
-                        launchConfetti();
-                    }
-                }, 200); // Check every 200ms for available data (can adjust as needed)
-
-                // Optional: If retrying data retrieval doesn't succeed after some time, show a message or alert
-                setTimeout(function() {
-                    if (!username || !bank || !account || !currency || !amount) {
-                        alert('Data retrieval failed. Redirecting to home page.');
-                        window.location.href = 'index.html';  // Redirect to home if data is not available
-                    }
-                }, 3000000); // Timeout after 3 seconds if data is still missing
-            };
+                launchConfetti();
+            }
         </script>
-
         <button class="bt" onclick="window.location.href='index.html';">Return To Home</button>
     </div>
 </body>
