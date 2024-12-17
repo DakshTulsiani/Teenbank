@@ -94,25 +94,26 @@
                 }
 
                 // Retrieve user balance data or initialize it
-                
-let userBalance = JSON.parse(localStorage.getItem('userBalance')) || {};
+                let userBalance = JSON.parse(localStorage.getItem('userBalance')) || {};
 
-if (!userBalance[email] || !Array.isArray(userBalance[email])) {
-    userBalance[email] = []; // Initialize as an empty array if not present or not an array
-    console.warn(`User balance for ${email} was not an array; initializing as an empty array.`);
-    // Optionally, alert the user or log an error to a server
-}
+                // Initialize the user's balance data if it does not exist
+                if (!userBalance[email]) {
+                    userBalance[email] = [];
+                }
 
+                // Push the new deposit data into the user's balance
+                userBalance[email].push({
+                    bank,
+                    account,
+                    currency,
+                    amount
+                });
 
-userBalance[email].push({
-    bank,
-    account,
-    currency,
-    amount
-});
+                // Save the updated userBalance back to localStorage
+                localStorage.setItem('userBalance', JSON.stringify(userBalance));
 
-localStorage.setItem('userBalance', JSON.stringify(userBalance));
-window.location.href = '4.html';
+                // Redirect to the next page (4.html)
+                window.location.href = '4.html';
             } else {
                 alert('Please fill in all the fields!');
             }
