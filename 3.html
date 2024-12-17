@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to the Bank</title>
     <link rel="stylesheet" href="st.css">
-    <link rel="icon" type="image/x-icon"  href="favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
 </head>
 <body>
     <div class="welcome">
@@ -72,15 +72,19 @@
     </div>
     <script>
         window.onload = function() {
+            // Retrieve the username from localStorage and display it on the page
             const username = localStorage.getItem('username');
-            document.getElementById('username-display').innerText = username;
+            document.getElementById('username-display').innerText = username || "Guest";
         }
 
         function storeDeposit() {
+            // Get the values from the form
             const bank = document.getElementById('bank').value;
             const account = document.getElementById('account').value;
             const currency = document.getElementById('currency').value;
             const amount = document.getElementById('amount').value;
+
+            console.log('Form values:', { bank, account, currency, amount });
 
             // Check if all fields are filled
             if (bank && account && currency && amount) {
@@ -95,24 +99,28 @@
 
                 // Retrieve user balance data or initialize it
                 let userBalance = JSON.parse(localStorage.getItem('userBalance')) || {};
+                console.log('Current user balance from localStorage:', userBalance);
 
-                // Initialize the user's balance data if it does not exist
-                if (!userBalance[email]) {
-                    userBalance[email] = [];
+                // Check if the email is already in the userBalance object
+                if (!userBalance[email] || !Array.isArray(userBalance[email])) {
+                    userBalance[email] = []; // Initialize as an empty array if not present or not an array
+                    console.warn(`User balance for ${email} was not an array; initializing as an empty array.`);
                 }
 
-                // Push the new deposit data into the user's balance
+                // Push the new deposit information to the user's balance
                 userBalance[email].push({
-                    bank: 'bank',
-                    account: 'account',
-                    currency: 'currency',
-                    amount: 'amount'
+                    bank,
+                    account,
+                    currency,
+                    amount
                 });
 
-                // Save the updated userBalance back to localStorage
+                console.log('Updated user balance:', userBalance);
+
+                // Save the updated user balance back to localStorage
                 localStorage.setItem('userBalance', JSON.stringify(userBalance));
 
-                // Redirect to the next page (4.html)d
+                // Redirect to the next page
                 window.location.href = '4.html';
             } else {
                 alert('Please fill in all the fields!');
