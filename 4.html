@@ -13,7 +13,6 @@
         <h1 class="r">Transaction Successful</h1>
         <div class="welcome">
             <h1 id="transaction-message" class="cur">Transaction Successful</h1>
-            <p id="missing-data-message" class="cur" style="color: red; font-size: 18px;"></p> <!-- Message for missing data -->
         </div>
 
         <script>
@@ -25,78 +24,40 @@
             const currency = localStorage.getItem('currency');
             const amount = localStorage.getItem('amount');
 
-            // Initialize a message for missing data
-            let missingDataMessage = "Incomplete transaction data: ";
+            // Display transaction details if available
+            const message = `${username ? username : 'Unknown user'} has deposited ${currency ? currency : 'unknown currency'} ${amount ? amount : 'unknown amount'} from ${bank ? bank : 'unknown bank'} using account ${account ? account : 'unknown account'}.`;
+            document.getElementById('transaction-message').innerText = message;
 
-            // Check if any of the required data is missing
-            let incompleteData = false;
+            // Launch confetti animation regardless of missing data
+            function launchConfetti() {
+                const duration = 900; // Duration of the animation
+                const end = Date.now() + duration;
 
-            if (!email) {
-                missingDataMessage += "Email, ";
-                incompleteData = true;
+                (function frame() {
+                    // Left side
+                    confetti({
+                        particleCount: 5,
+                        angle: 60, // Angle for the left side
+                        spread: 55,
+                        origin: { x: 0, y: Math.random() }, // From the left
+                    });
+
+                    // Right side
+                    confetti({
+                        particleCount: 5,
+                        angle: 120, // Angle for the right side
+                        spread: 55,
+                        origin: { x: 1, y: Math.random() }, // From the right
+                    });
+
+                    if (Date.now() < end) {
+                        requestAnimationFrame(frame);
+                    }
+                })();
             }
-            if (!username) {
-                missingDataMessage += "Username, ";
-                incompleteData = true;
-            }
-            if (!bank) {
-                missingDataMessage += "Bank, ";
-                incompleteData = true;
-            }
-            if (!account) {
-                missingDataMessage += "Account, ";
-                incompleteData = true;
-            }
-            if (!currency) {
-                missingDataMessage += "Currency, ";
-                incompleteData = true;
-            }
-            if (!amount) {
-                missingDataMessage += "Amount, ";
-                incompleteData = true;
-            }
 
-            // Remove the last comma and space
-            if (incompleteData) {
-                missingDataMessage = missingDataMessage.slice(0, -2);
-                document.getElementById('missing-data-message').innerText = missingDataMessage + " are missing.";
-                alert(missingDataMessage + ". Redirecting to home.");
-            } else {
-                // Display transaction details with correct format
-                const message = `${username} has deposited ${currency} ${amount} from ${bank} using account ${account}.`;
-                document.getElementById('transaction-message').innerText = message;
-
-                // Launch confetti from both sides
-                function launchConfetti() {
-                    const duration = 900; // Duration of the animation
-                    const end = Date.now() + duration;
-
-                    (function frame() {
-                        // Left side
-                        confetti({
-                            particleCount: 5,
-                            angle: 60, // Angle for the left side
-                            spread: 55,
-                            origin: { x: 0, y: Math.random() }, // From the left
-                        });
-
-                        // Right side
-                        confetti({
-                            particleCount: 5,
-                            angle: 120, // Angle for the right side
-                            spread: 55,
-                            origin: { x: 1, y: Math.random() }, // From the right
-                        });
-
-                        if (Date.now() < end) {
-                            requestAnimationFrame(frame);
-                        }
-                    })();
-                }
-
-                // Start the confetti animation
-                launchConfetti();
-            }
+            // Start the confetti animation
+            launchConfetti();
         </script>
         <button class="bt" onclick="window.location.href='index.html';">Return To Home</button>
     </div>
