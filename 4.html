@@ -61,7 +61,6 @@
                 missingDataMessage = missingDataMessage.slice(0, -2);
                 document.getElementById('missing-data-message').innerText = missingDataMessage + " are missing.";
                 alert(missingDataMessage + ". Redirecting to home.");
-                window.location.href = 'index.html';  // Redirect to home if data is missing
             } else {
                 // Display transaction details with correct format
                 const message = `${username} has deposited ${currency} ${amount} from ${bank} using account ${account}.`;
