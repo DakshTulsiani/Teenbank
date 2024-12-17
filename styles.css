@@ -54,10 +54,10 @@ body{
 }
 .btnn{
     font-size: 18px;
-    padding: 10px 15px;
+    padding: 0px 15px;
     background: transparent;
     border: none;
-    margin-top: 10px;
+    margin-top: 0px;
     margin-left: 80px;
     cursor: pointer;
     text-decoration: none;
