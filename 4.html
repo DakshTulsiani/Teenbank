@@ -4,12 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transaction Successful</title>
-    <script src="https://cdn.jsdelivr.net/npm/c anvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <link rel="stylesheet" href="sta.css">
+    <style>
+        .return-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007BFF; /* Bootstrap primary color */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .return-button:hover {
+            background-color: #0056b3; /* Darker shade for hover effect */
+        }
+    </style>
 </head>
 <body>
     <div class="welcome">
         <h1 id="transaction-message" class="cur"></h1>
+        <button class="return-button" id="return-button">Return To Home</button>
     </div>
 
     <script>
@@ -79,6 +96,11 @@
                 window.location.href = 'index.html';
             }, 3000); // Redirect after 3 seconds
         }
+
+        // Add event listener to the return button
+        document.getElementById('return-button').addEventListener('click', () => {
+            window.location.href = 'index.html';
+        });
     </script>
 </body>
 </html>
