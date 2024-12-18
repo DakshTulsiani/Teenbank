@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bank Of Teens</title>
+    <title>Bank For Teens</title>
     <link rel="stylesheet" href="stylesd.css">
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <style>
@@ -100,14 +100,4 @@
             transactionListDiv.innerHTML = transactionDetails || 'No transactions found for this user.';
 
             // Display total balance
-            let totalBalanceMessage = 'Total Balance: < br>';
-            for (const [currency, amount] of Object.entries(totalBalance)) {
-                totalBalanceMessage += `${currency} ${amount.toFixed(2)}<br>`;
-            }
-            balanceDiv.innerHTML = totalBalanceMessage || '${username} has deposited ${currency} ${amount} from bank ${bank} using account ${account}';
-        } else {
-            balanceDiv.innerText = '${username} has deposited ${currency} ${amount} from bank ${bank} using account ${account}.';
-        }
-    </script>
-</body>
-</html>
+            let totalBalanceMessage = 'Total Balance: <br>'};
