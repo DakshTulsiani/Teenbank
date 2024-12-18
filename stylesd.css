@@ -50,7 +50,7 @@
     .blue{
         color: blue;
     }
-    ul li a{
+    .fat{
         text-decoration: none;
         color: #fff;
         font-family: Arial;
@@ -73,6 +73,13 @@
         font-family: Arial;
         letter-spacing: 1.2px;
         line-height: 30px;
+    }
+    .content .par a{
+        text-decoration: none;
+        color: #167fff;
+    }
+    .content .par a:hover{
+        color: orange;
     }
     .content h1{
         font-family: 'Times New Roman';
