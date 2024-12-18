@@ -28,6 +28,10 @@
             color: black;
             z-index: 10;
         }
+        .transaction-list {
+            margin-top: 60px; /* To avoid overlap with fixed elements */
+            padding: 20px;
+        }
     </style>
 </head>
 <body>
@@ -55,23 +59,49 @@
 
     <div class="email-display" id="email-display"></div>
     <div class="balance-message" id="balance-message"></div>
+    <div class="transaction-list" id="transaction-list"></div>
 
     <script>
         const email = localStorage.getItem('email');
         const emailDisplay = document.getElementById('email-display');
         const balanceDiv = document.getElementById('balance-message');
+        const transactionListDiv = document.getElementById('transaction-list');
 
         if (email) {
             emailDisplay.innerText = `Logged in as: ${email}`;
         }
 
         const userBalance = JSON.parse(localStorage.getItem('userBalance')) || {};
-        const balance = userBalance[email] || 0; // Initialize balance to 0 if not found
+        const transactions = JSON.parse(localStorage.getItem('transactions')) || [];
 
-        if (balance > 0) {
-            balanceDiv.innerHTML = `Your total balance is: ${balance.toFixed(2)} (in your last currency used)`;
+        // Display transactions
+        if (transactions.length > 0) {
+            let totalBalance = {};
+            let transactionDetails = '';
+
+            transactions.forEach(transaction => {
+                const { username, currency, amount, bank, account } = transaction;
+
+                // Add to transaction details
+                transactionDetails += `${username} has deposited ${currency} ${amount} from bank ${bank} using account ${account}.<br>`;
+
+                // Calculate total balance by currency
+                if (!totalBalance[currency]) {
+                    totalBalance[currency] = 0;
+                }
+                totalBalance[currency] += parseFloat(amount);
+            });
+
+            transactionListDiv.innerHTML = transactionDetails;
+
+            // Display total balance
+            let totalBalanceMessage = 'Total Balance: <br>';
+            for (const [currency, amount] of Object.entries(totalBalance)) {
+                totalBalanceMessage += `${currency} ${amount.toFixed(2)}<br>`;
+ }
+            balanceDiv.innerHTML = totalBalanceMessage;
         } else {
-            balanceDiv.innerHTML = 'No deposits made. Start saving your money!';
+            balanceDiv.innerText = 'No deposits made.';
         }
     </script>
 </body>
