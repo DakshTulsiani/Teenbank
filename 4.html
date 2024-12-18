@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transaction Successful</title>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/c anvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <link rel="stylesheet" href="sta.css">
 </head>
 <body>
@@ -19,15 +19,24 @@
         const account = localStorage.getItem('account');
         const currency = localStorage.getItem('currency');
         const amount = localStorage.getItem('amount');
+        const email = localStorage.getItem('email');
 
         // Check if all required data is available
-        if (!username || !bank || !account || !currency || !amount) {
+        if (!username || !bank || !account || !currency || !amount || !email) {
             alert('Incomplete transaction data. Redirecting to home.');
             window.location.href = 'index.html';
         } else {
             // Display transaction details
             const message = `${username} has deposited ${currency} ${amount} from ${bank} using account ${account}.`;
             document.getElementById('transaction-message').innerText = message;
+
+            // Store the deposit in localStorage
+            const userBalance = JSON.parse(localStorage.getItem('userBalance')) || {};
+            if (!userBalance[email]) {
+                userBalance[email] = [];
+            }
+            userBalance[email].push({ currency, amount, bank, account });
+            localStorage.setItem('userBalance', JSON.stringify(userBalance));
 
             // Launch confetti from both sides
             function launchConfetti() {
@@ -64,6 +73,11 @@
 
             // Start the confetti animation
             launchConfetti();
+
+            // Redirect to index.html after a delay
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 3000); // Redirect after 3 seconds
         }
     </script>
 </body>

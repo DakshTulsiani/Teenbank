@@ -48,7 +48,11 @@
         padding-left: 110px;
     }
     .blue{
+        text-decoration: none;
         color: blue;
+        font-family: Arial;
+        font-weight: bold;
+        transition: 0.4s ease-in-out;
     }
     .fat{
         text-decoration: none;
