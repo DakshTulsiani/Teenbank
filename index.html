@@ -57,51 +57,36 @@
         </div>
     </div>
 
-    <div class="email-display" id="email-display"></div>
-    <div class="balance-message" id="balance-message"></div>
-    <div class="transaction-list" id="transaction-list"></div>
+   <div id="balance"></div>
 
     <script>
-        const email = localStorage.getItem('email');
-        const emailDisplay = document.getElementById('email-display');
-        const balanceDiv = document.getElementById('balance-message');
-        const transactionListDiv = document.getElementById('transaction-list');
+        function login() {
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
 
-        if (email) {
-            emailDisplay.innerText = `Logged in as: ${email}`;
+            if (username && email) {
+                // Save username to localStorage
+                localStorage.setItem('username', username);
+                localStorage.setItem('email', email);
+
+                // Retrieve the user's balance from localStorage
+                const userBalance = JSON.parse(localStorage.getItem('userBalance')) || {};
+
+                // Display the balance if available
+                displayBalance(userBalance[email]);
+                window.location.href = '3.html';
+            } else {
+                alert('Please enter your username and email!');
+            }
         }
 
-        const userBalance = JSON.parse(localStorage.getItem('userBalance')) || {};
-        const transactions = JSON.parse(localStorage.getItem('transactions')) || [];
-
-        // Display transactions
-        if (transactions.length > 0) {
-            let totalBalance = {};
-            let transactionDetails = '';
-
-            transactions.forEach(transaction => {
-                const { username, currency, amount, bank, account } = transaction;
-
-                // Add to transaction details
-                transactionDetails += `${username} has deposited ${currency} ${amount} from bank ${bank} using account ${account}.<br>`;
-
-                // Calculate total balance by currency
-                if (!totalBalance[currency]) {
-                    totalBalance[currency] = 0;
-                }
-                totalBalance[currency] += parseFloat(amount);
-            });
-
-            transactionListDiv.innerHTML = transactionDetails;
-
-            // Display total balance
-            let totalBalanceMessage = 'Total Balance: <br>';
-            for (const [currency, amount] of Object.entries(totalBalance)) {
-                totalBalanceMessage += `${currency} ${amount.toFixed(2)}<br>`;
- }
-            balanceDiv.innerHTML = totalBalanceMessage;
-        } else {
-            balanceDiv.innerText = 'No deposits made.';
+        function displayBalance(userData) {
+            const balanceDiv = document.getElementById('balance');
+            if (userData) {
+                balanceDiv.innerText = `Balance: ${userData.amount} ${userData.currency}`;
+            } else {
+                balanceDiv.innerText = 'No balance available';
+            }
         }
     </script>
 </body>
