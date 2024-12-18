@@ -61,41 +61,31 @@
                 const end = Date.now() + duration;
 
                 (function frame() {
-                    // Left side confetti
-                    confetti({
-                        particleCount: 10, // More particles for a faster effect
-                        angle: 60, // Shoot from left side
-                        spread: 70,
-                        origin: { x: 0, y: Math.random() }, // Random vertical positions
-                        startVelocity: 60, // Faster speed
-                        gravity: 0.8, // Adjust for a natural fall
-                    });
-
-                    // Right side confetti
-                    confetti({
-                        particleCount: 10,
-                        angle: 120, // Shoot from right side
-                        spread: 70,
-                        origin: { x: 1, y: Math.random() }, // Random vertical positions
-                        startVelocity: 60,
-                        gravity: 0.8,
-                    });
-
-                    // Continue until the duration is reached
-                    if (Date.now() < end) {
+                    const timeLeft = end - Date.now();
+                    if (timeLeft > 0) {
+                        confetti({
+                            particleCount: 5,
+                            angle: 60,
+                            spread: 55,
+                            origin: { x: 0 },
+                        });
+                        confetti({
+                            particleCount: 5,
+                            angle: 120,
+                            spread: 55,
+                            origin: { x: 1 },
+                        });
                         requestAnimationFrame(frame);
                     }
                 })();
             }
-
-            // Start the confetti animation
             launchConfetti();
-
-            // Add event listener to the return button
-            document.getElementById('return-button').addEventListener('click', () => {
-                window.location.href = 'index.html';
-            });
         }
+
+        // Return to home function
+        document.getElementById('return-button').onclick = function() {
+            window.location.href = 'index.html';
+        };
     </script>
 </body>
 </html>
