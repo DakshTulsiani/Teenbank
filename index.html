@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Balance</title>
+    <title>Bank For Teens</title>
     <link rel="stylesheet" href="stylesd.css">
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <style>
@@ -35,20 +35,41 @@
     </style>
 </head>
 <body>
-    <h1>Your Deposits</h1>
-    <div id="email-display"></div>
-    <div class="transaction-list" id="transaction-list"></div>
+    <div class="main">
+        <div class="navbar">
+            <div class="icon">
+                <h2 class="logo">Bank Of Teens</h2>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li class="dead"><a href="index.html" class="blue">HOME</a></li>
+                    <li><a href="about.html" class="fat">ABOUT</a></li>
+                    <li><a href="learn.html" class="fat">LEARN</a></li>
+                    <li style="width: 140px;"><a href="why.html" class="fat">WHY US</a></li>
+                    <li style="margin-left: 0px;"><a href="contact.html" class="fat">CONTACT</a></li>
+                </ul> 
+            </div>
+        </div>
+        <div class="content">
+            <h1>Bank<br><span>Of</span> <br>Teens</h1>
+            <p class="par">You probably can't find a secure way to secure your money as a teenager, and that's probably why you are here, well<br>look no longer because Bank Of Teens is a website made purely so that young teenagers or entrepreneurs, if we may,<br>can learn how to deposit and save money. So join us and head over to all the other tabs to learn what we are about, what is saving and depositing and why you should choose us.</p>
+            <button class="cn"><a href="1.html">Login To Start Saving</a></button>
+        </div>
+    </div>
+
+    <div class="email-display" id="email-display"></div>
     <div class="balance-message" id="balance-message"></div>
+    <div class="transaction-list" id="transaction-list"></div>
 
     <script>
-        // Get the user's email from localStorage
         const email = localStorage.getItem('email');
         const emailDisplay = document.getElementById('email-display');
         const balanceDiv = document.getElementById('balance-message');
         const transactionListDiv = document.getElementById('transaction-list');
 
         // Display the user's email at the top
-        if (email) emailDisplay.innerText = `Logged in as: ${email}`;
+        if (email) {
+            emailDisplay.innerText = `Logged in as: ${email}`;
         }
 
         // Retrieve transactions from localStorage
@@ -79,7 +100,7 @@
             transactionListDiv.innerHTML = transactionDetails || 'No transactions found for this user.';
 
             // Display total balance
-            let totalBalanceMessage = 'Total Balance: <br>';
+            let totalBalanceMessage = 'Total Balance: < br>';
             for (const [currency, amount] of Object.entries(totalBalance)) {
                 totalBalanceMessage += `${currency} ${amount.toFixed(2)}<br>`;
             }
