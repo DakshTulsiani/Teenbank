@@ -24,6 +24,8 @@
         padding-left: 20px;
         float: left;
         padding-top: 10px;
+        width: 256px;
+        margin-top: 12px
     }
     .menu{
         width: 400px;
@@ -44,6 +46,9 @@
     }
     .dead{
         padding-left: 110px;
+    }
+    .blue{
+        color: blue;
     }
     ul li a{
         text-decoration: none;
