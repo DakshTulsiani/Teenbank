@@ -3,41 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Bank For Teens</title>
+    <link rel="stylesheet" href="stylesd.css">
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <style>
+        .balance-message {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 20px;
+            font-family: Arial, sans-serif;
+            z-index: 10;
+        }
+        .email-display {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            font-size: 18px;
+            font-family: Arial, sans-serif;
+            color: black;
+            z-index: 10;
+        }
+    </style>
 </head>
 <body>
-    <div class="home">
-        <h1>Welcome to Your Account</h1>
-        <p id="balance-message"></p>
-        <button onclick="logout()">Logout</button>
+    <div class="main">
+        <div class="navbar">
+            <div class="icon">
+                <h2 class="logo">Bank Of Teens</h2>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li class="dead"><a href="index.html" class="blue">HOME</a></li>
+                    <li><a href="about.html" class="fat">ABOUT</a></li>
+                    <li><a href="learn.html" class="fat">LEARN</a></li>
+                    <li style="width: 140px;"><a href="why.html" class="fat">WHY US</a></li>
+                    <li style="margin-left: 0px;"><a href="contact.html" class="fat">CONTACT</a></li>
+                </ul> 
+            </div>
+        </div>
+        <div class="content">
+            <h1>Bank<br><span>Of</span> <br>Teens</h1>
+            <p class="par">You probably can't find a secure way to secure your money as a teenager, and that's probably why you are here, well<br>look no longer because Bank Of Teens is a website made purely so that young teenagers or entrepreneurs, if we may,<br>can learn how to deposit and save money. So join us and head over to all the other tabs to learn what we are about, what is saving and depositing and why you should choose us.</p>
+            <button class="cn"><a href="1.html">Login To Start Saving</a></button>
+        </div>
     </div>
 
-    <script>
-        // Function to display the user's balance
-        function displayBalance() {
-            const email = localStorage.getItem('email');
-            const userBalance = JSON.parse(localStorage.getItem('userBalance')) || {};
+    <div class="email-display" id="email-display"></div>
+    <div class="balance-message" id="balance-message"></div>
 
-            if (userBalance[email]) {
-                let totalBalance = 0;
-                userBalance[email].forEach(deposit => {
-                    totalBalance += parseFloat(deposit.amount);
-                });
-                document.getElementById('balance-message').innerText = `Your total balance is: ${totalBalance.toFixed(2)}`;
-            } else {
-                document.getElementById('balance-message').innerText = 'You have no deposits yet.';
-            }
+    <script>
+        const email = localStorage.getItem('email');
+        const emailDisplay = document.getElementById('email-display');
+        const balanceDiv = document.getElementById('balance-message');
+
+        if (email) {
+            emailDisplay.innerText = `Logged in as: ${email}`;
         }
 
-        // Call the function to display the balance when the page loads
-        displayBalance();
+        const userBalance = JSON.parse(localStorage.getItem('userBalance')) || {};
+        const balance = userBalance[email] || 0; // Initialize balance to 0 if not found
 
-        // Function to logout and clear localStorage
-        function logout() {
-            localStorage.clear();
-            window.location.href = '1.html'; // Redirect to login page
+        if (balance > 0) {
+            balanceDiv.innerHTML = `Your total balance is: ${balance.toFixed(2)} (in your last currency used)`;
+        } else {
+            balanceDiv.innerHTML = 'No deposits made. Start saving your money!';
         }
     </script>
 </body>

@@ -47,15 +47,15 @@
             const message = `${username} has deposited ${currency} ${amount} from ${bank} using account ${account}.`;
             document.getElementById('transaction-message').innerText = message;
 
-            // Store the deposit in localStorage
+            // Update the user's balance in localStorage
             const userBalance = JSON.parse(localStorage.getItem('userBalance')) || {};
             if (!userBalance[email]) {
-                userBalance[email] = [];
+                userBalance[email] = 0; // Initialize balance if it doesn't exist
             }
-            userBalance[email].push({ currency, amount, bank, account });
+            userBalance[email] += parseFloat(amount); // Update balance
             localStorage.setItem('userBalance', JSON.stringify(userBalance));
 
-            // Launch confetti from both sides
+            // Launch confetti animation
             function launchConfetti() {
                 const duration = 900; // Total animation duration (900 milliseconds)
                 const end = Date.now() + duration;
